@@ -32,8 +32,6 @@ import org.jboss.as.controller.OperationFailedException;
 import org.jboss.as.controller.PathAddress;
 import org.jboss.as.controller.PathElement;
 import org.jboss.as.controller.registry.Resource;
-import org.jboss.as.domain.management.SecurityRealm;
-import org.jboss.as.domain.management.security.SSLContextService;
 import org.jboss.dmr.ModelNode;
 import org.jboss.msc.inject.Injector;
 import org.jboss.msc.service.AbstractService;
@@ -105,10 +103,6 @@ public class ProfileService extends AbstractService<Profile> {
           .addService(profileServiceName(profileAddress), profileService);
 
       if (profile.getSecurityRealm() != null) {
-        SSLContextService.ServiceUtil.addDependency(builder, 
-            profileService.getSslContextInjector(), 
-            SecurityRealm.ServiceUtil.createServiceName(
-                profile.getSecurityRealm()), false);
       }
       
       ServiceController<?> controller = builder.install();

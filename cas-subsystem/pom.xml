@@ -111,11 +111,53 @@
       <groupId>org.wildfly.core</groupId>
       <artifactId>wildfly-controller</artifactId>
       <optional>true</optional>
+<!--      <exclusions>-->
+<!--        <exclusion>-->
+<!--          <groupId>org.wildfly.security</groupId>-->
+<!--          <artifactId>wildfly-elytron-base</artifactId>-->
+<!--        </exclusion>-->
+<!--        <exclusion>-->
+<!--          <groupId>org.wildfly.security</groupId>-->
+<!--          <artifactId>wildfly-elytron-realm</artifactId>-->
+<!--        </exclusion>-->
+<!--        <exclusion>-->
+<!--          <groupId>org.wildfly.wildfly-http-client</groupId>-->
+<!--          <artifactId>wildfly-http-client-common</artifactId>-->
+<!--        </exclusion>-->
+<!--      </exclusions>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>org.wildfly.security</groupId>-->
+<!--      <artifactId>wildfly-elytron-base</artifactId>-->
+<!--      <version>1.17.1.Final</version>-->
+<!--      <scope>provided</scope>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>org.wildfly.security</groupId>-->
+<!--      <artifactId>wildfly-elytron-realm</artifactId>-->
+<!--      <version>1.17.1.Final</version>-->
+<!--      <scope>provided</scope>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>org.wildfly.security</groupId>-->
+<!--      <artifactId>wildfly-elytron</artifactId>-->
+<!--      <version>1.17.1.Final</version>-->
     </dependency>
     <dependency>
       <groupId>org.wildfly.core</groupId>
       <artifactId>wildfly-server</artifactId>
       <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.wildfly.security</groupId>
+      <artifactId>wildfly-elytron</artifactId>
+      <version>1.17.1.Final</version>
+      <exclusions>
+        <exclusion>
+          <groupId>commons-logging</groupId>
+          <artifactId>commons-logging</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.wildfly.core</groupId>

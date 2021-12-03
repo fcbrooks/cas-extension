@@ -1,5 +1,5 @@
 /*
- * File created on May 21, 2014 
+ * File created on May 21, 2014
  *
  * Copyright 2007-2014 Carl Harris, Jr.
  *
@@ -23,15 +23,14 @@ import io.undertow.security.idm.Credential;
 import java.io.Serializable;
 
 import org.soulwing.cas.api.IdentityAssertion;
-import org.soulwing.cas.jaas.IdentityAssertionHolder;
 
 /**
  * A credential that contains a CAS authentication ticket.
  *
  * @author Carl Harris
  */
-public class IdentityAssertionCredential 
-    implements Credential, IdentityAssertionHolder, Serializable {
+public class IdentityAssertionCredential
+    implements Credential, Serializable {
 
   private static final long serialVersionUID = -7355252883140571658L;
 
@@ -50,7 +49,6 @@ public class IdentityAssertionCredential
    * Gets the {@code identityAssertion} property.
    * @return property value
    */
-  @Override
   public IdentityAssertion getIdentityAssertion() {
     return identityAssertion;
   }

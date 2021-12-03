@@ -722,8 +722,58 @@ batch
 run-batch --headers={allow-resource-service-restart=true}
 ```
 
+Elytron Security Realm (Experimental)
+------------
 
+### Configuration
 
+This could be configured in a variety of ways depending on your needs.  Consult the
+general Elytron docs for the ways to configure a security realm.  For the purpose
+of demonstration the quickest way to configure is to replace the default ApplicationRealm with 
+a custom realm
+
+```
+<custom-realm name="ApplicationRealm" module="org.soulwing.cas" class-name="org.soulwing.cas.elytron.CASSecurityRealm">
+  <configuration>
+      <property name="protocol" value="SAML-1.1"/>
+      <property name="service-url" value="https://apps.example.com/example-app"/>
+      <property name="server-url" value="https://cas.example.com/cas"/>
+      <property name="role-attribute" value="isMemberOf" />
+  </configuration>
+</custom-realm>
+```
+
+Add the service loader mechanism factory, and change the application-http-authentication 
+factory to use this factory as well as the CAS mechanism
+
+```
+<http>
+    ...
+    <http-authentication-factory name="application-http-authentication" security-domain="ApplicationDomain" http-server-mechanism-factory="cas-factory">
+        <mechanism-configuration>
+            <mechanism mechanism-name="CAS">
+                <mechanism-realm realm-name="ApplicationRealm"/>
+            </mechanism>
+        </mechanism-configuration>
+    </http-authentication-factory>
+    <provider-http-server-mechanism-factory name="global"/>
+    <service-loader-http-server-mechanism-factory name="cas-factory" module="org.soulwing.cas"/>
+</http>
+```
+
+Change the undertow subsystem to override deployments
+
+```
+<subsystem xmlns="urn:jboss:domain:undertow:12.0" default-server="default-server" default-virtual-host="default-host" default-servlet-container="default" default-security-domain="other" statistics-enabled="${wildfly.undertow.statistics-enabled:${wildfly.statistics-enabled:false}}">
+    ...
+    <application-security-domains>
+        <application-security-domain name="other" http-authentication-factory="application-http-authentication" override-deployment-config="true"/>
+    </application-security-domains>
+</subsystem>
+```
+
+In the app deployment descriptors do not specify a security domain, so it will
+fall back the "other" domain.
   
 
  
